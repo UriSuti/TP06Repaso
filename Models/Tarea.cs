@@ -2,18 +2,20 @@ namespace TP06Repaso.Models;
 
 public class Tarea 
 {
-    public string titulo { get; private set; }
-    public string descripcion { get; private set; }
-    public DateTime fecha { get; private set; }
-    public bool finalizada { get; private set; }
-    public string username { get; private set; }
+    public int Id { get; private set; }
+    public string Titulo { get; private set; }
+    public string Descripcion { get; private set; }
+    public DateTime Fecha { get; private set; }
+    public bool Finalizada { get; private set; }
+    public string Username { get; private set; }
 
-    public Tarea (string titulo, string descripcion, DateTime fecha, bool finalizada, string username)
+    public Tarea (int Id, string Titulo, string Descripcion, DateTime Fecha, bool Finalizada, int IdUsuario)
     {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fecha = fecha;
-        this.finalizada = finalizada;
-        this.username = username;
+        this.Id = Id;
+        this.Titulo = Titulo;
+        this.Descripcion = Descripcion;
+        this.Fecha = Fecha;
+        this.Finalizada = Finalizada;
+        this.IdUsuario = IdUsuario;
     }
 }
