@@ -24,19 +24,19 @@ public static class BD
 
     public static void Registro(Usuario usuario)
     {
-        string query = "INSERT INTO Usuarios (Id, Username, Password, Nombre, Apellido, Foto, UltimoLogin) VALUES (@pId, @pUsername, @pPassword, @pNombre, @pApellido, @pFoto, @pUltimoLogin)";
+        string query = "INSERT INTO Usuarios (Username, Password, Nombre, Apellido, Foto, UltimoLogin) VALUES (@pId, @pUsername, @pPassword, @pNombre, @pApellido, @pFoto, @pUltimoLogin)";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pId = usuario.id, pUsername = usuario.username, pPassword = usuario.password, pNombre = usuario.nombre, pApellido = usuario.apellido, pFoto = usuario.foto, pUltimoLogin = usuario.ultimoLogin });
+            connection.Execute(query, new { pUsername = usuario.Username, pPassword = usuario.Password, pNombre = usuario.Nombre, pApellido = usuario.Apellido, pFoto = usuario.Foto, pUltimoLogin = usuario.UltimoLogin });
         }
     }
 
     public static void AgregarTarea(Tarea tarea)
     {
-        string query = "INSERT INTO Tareas (Id, Titulo, Descripcion, Fecha, Finalizada, IdUsername) VALUES (@pId, @pTitulo, @pDescripcion, @pFecha, @pFinalizada, @pUsername)";
+        string query = "INSERT INTO Tareas (Titulo, Descripcion, Fecha, Finalizada, IdUsername) VALUES (@pId, @pTitulo, @pDescripcion, @pFecha, @pFinalizada, @pUsername)";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pId = tarea.id, pTitulo = tarea.titulo, pDescripcion = tarea.descripcion, pFecha = tarea.fecha, @pFinalizada = tarea.finalizada, @pUsername = tarea.username });
+            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, @pFinalizada = tarea.Finalizada, @pUsername = tarea.IdUsuario });
         }
     }
 
@@ -84,10 +84,21 @@ public static class BD
 
     public static void ActualizarTarea(Tarea tarea)
     {
-        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada WHERE Id = @pId";
+        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada WHERE Titulo = @pTitulo";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pId = tarea.id, pTitulo = tarea.titulo, pDescripcion = tarea.descripcion, pFecha = tarea.fecha, pFinalizada = tarea.finalizada });
+            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada });
         }
+    }
+
+    public static int GetId(string username, string password)
+    {
+        int id;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT Id FROM Usuarios WHERE Username = @pUsername AND Password = @pPassword";
+            id = connection.QueryFirstOrDefault<int>(query, new { @pUsername = username, @pPassword = password });
+        }
+        return id;
     }
 }
