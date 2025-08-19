@@ -24,10 +24,10 @@ public static class BD
 
     public static void Registro(Usuario usuario)
     {
-        string query = "INSERT INTO Usuarios (Username, Password, Nombre, Apellido, Foto, UltimoLogin) VALUES (@pId, @pUsername, @pPassword, @pNombre, @pApellido, @pFoto, @pUltimoLogin)";
+        string query = "INSERT INTO Usuarios (Username, Password, Nombre, Apellido, Foto) VALUES (@pId, @pUsername, @pPassword, @pNombre, @pApellido, @pFoto)";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pUsername = usuario.Username, pPassword = usuario.Password, pNombre = usuario.Nombre, pApellido = usuario.Apellido, pFoto = usuario.Foto, pUltimoLogin = usuario.UltimoLogin });
+            connection.Execute(query, new { pUsername = usuario.Username, pPassword = usuario.Password, pNombre = usuario.Nombre, pApellido = usuario.Apellido, pFoto = usuario.Foto });
         }
     }
 
@@ -82,12 +82,12 @@ public static class BD
         }
     }
 
-    public static void ActualizarTarea(Tarea tarea)
+    public static void ActualizarTarea(Tarea tarea, int id)
     {
-        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada WHERE Titulo = @pTitulo";
+        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada WHERE Id = @pId";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada });
+            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada, pId = id });
         }
     }
 
