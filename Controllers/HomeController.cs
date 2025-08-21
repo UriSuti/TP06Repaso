@@ -22,6 +22,7 @@ public class HomeController : Controller
     {
         List<Tarea> tareas = BD.VerTareas(int.Parse(HttpContext.Session.GetString("Usuario")));
         ViewBag.Tareas = tareas;
+        ViewBag.Usuario = BD.GetUsuario(int.Parse(HttpContext.Session.GetString("Usuario")));
         return View();
     }
 
@@ -32,27 +33,33 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult AgregarTarea(string titulo, string descripcion, DateTime fecha, bool finalizada)
+    [HttpPost]
+    public IActionResult AgregarTarea(string titulo, string descripcion, DateTime fecha)
     {
         BD.AgregarTarea(new Tarea(titulo, descripcion, fecha, false, int.Parse(HttpContext.Session.GetString("Usuario"))));
-        return View("VerTarea");
+        return RedirectToAction("VerTareas");
+    }
+
+    public IActionResult irAgregarTarea()
+    {
+        return View("AgregarTarea");
     }
 
     public IActionResult EliminarTarea(int id)
     {
         int eliminado = BD.EliminarTarea(id);
-        return View("VerTareas");
+        return RedirectToAction("VerTareas");
     }
 
-    public IActionResult FinalizarTarea(int id)
+    public IActionResult FinalizarTarea(int idTarea)
     {
-        BD.FinalizarTarea(id);
-        return View("VerTarea");
+        BD.FinalizarTarea(idTarea);
+        return RedirectToAction("VerTarea", new { id = idTarea });
     }
 
-    public IActionResult ModificarTarea(string titulo, string descripcion, DateTime fecha, bool finalizada, int id)
+    public IActionResult ModificarTarea(string titulo, string descripcion, DateTime fecha, int idTarea)
     {
-        BD.ActualizarTarea(new Tarea(titulo, descripcion, fecha, finalizada, int.Parse(HttpContext.Session.GetString("Usuario"))), id);
-        return View("VerTarea");
+        BD.ActualizarTarea(new Tarea(titulo, descripcion, fecha, false, int.Parse(HttpContext.Session.GetString("Usuario"))), idTarea);
+        return RedirectToAction("VerTarea", new { id = idTarea });
     }
 }

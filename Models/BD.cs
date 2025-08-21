@@ -84,14 +84,14 @@ public static class BD
 
     public static void ActualizarTarea(Tarea tarea, int id)
     {
-        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada WHERE Id = @pId";
+        string query = "UPDATE Tareas SET Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada, IdUsuario = @pIdUsuario WHERE Id = @pId";
         using (SqlConnection connection = new SqlConnection(_connectionString))
         {
-            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada, pId = id });
+            connection.Execute(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada, pIdUsuario = tarea.IdUsuario, pId = id });
         }
     }
 
-    public static int GetId(string username, string password)
+    public static int GetIdUser(string username, string password)
     {
         int id;
         using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -100,5 +100,27 @@ public static class BD
             id = connection.QueryFirstOrDefault<int>(query, new { @pUsername = username, @pPassword = password });
         }
         return id;
+    }
+
+    public static int GetIdTarea(Tarea tarea)
+    {
+        int id;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT Id FROM Tareas WHERE Titulo = @pTitulo, Descripcion = @pDescripcion, Fecha = @pFecha, Finalizada = @pFinalizada";
+            id = connection.QueryFirstOrDefault<int>(query, new { pTitulo = tarea.Titulo, pDescripcion = tarea.Descripcion, pFecha = tarea.Fecha, pFinalizada = tarea.Finalizada });
+        }
+        return id;
+    }
+
+    public static Usuario GetUsuario(int id)
+    {
+        Usuario usuario;
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            string query = "SELECT Id FROM Tareas WHERE Id = @pId";
+            usuario = connection.QueryFirstOrDefault<Usuario>(query, new { pId = id });
+        }
+        return usuario;
     }
 }

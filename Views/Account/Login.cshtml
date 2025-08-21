@@ -2,13 +2,36 @@
     ViewData["Title"] = "Login";
 }
 
-@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
-{
-    <p>@ViewBag.Mensaje</p>
-}
+<div class="container">
+    <header class="header">
+        <div class="brand">Tu App</div>
+        <nav class="nav">
+            <a href='@Url.Action("Index","Home")'>Inicio</a>
+            <a href='@Url.Action("irRegistro","Account")'>Registrarse</a>
+        </nav>
+    </header>
 
-<form action='@Url.Action("Login", "Account")' method='post' enctype='multipart/form-data'>
-    Username: <input type='text' name='username'><br />
-    Contraseña: <input type='password' name='password'><br />
-    <input type='submit' value='Ingresar'>
-</form>
+    <section class="panel">
+        <h2 class="section-title">Ingresar</h2>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+        {
+            <div class="alert warn">@ViewBag.Mensaje</div>
+        }
+
+        <form class="form" action='@Url.Action("Login", "Account")' method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <label for="login-username">Username</label>
+                <input id="login-username" class="input" type="text" name="username" autocomplete="username" />
+            </div>
+            <div class="form-row">
+                <label for="login-password">Contraseña</label>
+                <input id="login-password" class="input" type="password" name="password" autocomplete="current-password" />
+            </div>
+            <div class="actions">
+                <button class="btn primary" type="submit">Ingresar</button>
+                <a class="btn ghost" href='@Url.Action("irRegistro","Account")'>Crear cuenta</a>
+            </div>
+        </form>
+    </section>
+</div>

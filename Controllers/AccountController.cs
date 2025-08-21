@@ -34,7 +34,7 @@ public class AccountController : Controller
         }
         else
         {
-            HttpContext.Session.SetString("Usuario", BD.GetId(username, password).ToString());
+            HttpContext.Session.SetString("Usuario", BD.GetIdUser(username, password).ToString());
             return RedirectToAction("VerTareas", "Home");
         }
     }
@@ -48,7 +48,7 @@ public class AccountController : Controller
             Directory.CreateDirectory(rutaCarpeta);
         string rutaCompleta = Path.Combine(rutaCarpeta, nombreFoto);
         BD.Registro(new Usuario(username, password, nombre, apellido, rutaCompleta));
-        HttpContext.Session.SetString("Usuario", BD.GetId(username, password).ToString());
+        HttpContext.Session.SetString("Usuario", BD.GetIdUser(username, password).ToString());
         return RedirectToAction("VerTareas", "Home");
     }
 

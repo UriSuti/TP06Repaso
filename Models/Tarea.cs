@@ -16,4 +16,6 @@ public class Tarea
         this.Finalizada = Finalizada;
         this.IdUsuario = IdUsuario;
     }
+
+    public int getId () { return BD.GetIdTarea(new Tarea(this.Titulo, this.Descripcion, this.Fecha, this.Finalizada, this.IdUsuario)); }
 }

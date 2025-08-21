@@ -2,11 +2,43 @@
     ViewData["Title"] = "Registro";
 }
 
-<form action='@Url.Action("Registro", "Account")' method='post' enctype='multipart/form-data'>
-    Username: <input type='text' name='username'><br />
-    Contraseña: <input type='text' name='password'><br />
-    Nombre: <input type='text' name='nombre'><br />
-    Apellido: <input type='text' name='apellido'><br />
-    Foto: <input type='file' name='foto'>
-    <input type='submit' value='Registrarse'>
-</form>
+<div class="container">
+    <header class="header">
+        <div class="brand">Tu App</div>
+        <nav class="nav">
+            <a href='@Url.Action("Index","Home")'>Inicio</a>
+            <a href='@Url.Action("irLogin","Account")'>Loguearse</a>
+        </nav>
+    </header>
+
+    <section class="panel">
+        <h2 class="section-title">Registro</h2>
+        <p class="helper">Subí una foto de perfil si querés (opcional).</p>
+
+        <form class="form" action='@Url.Action("Registro", "Account")' method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <label for="reg-username">Username</label>
+                <input id="reg-username" class="input" type="text" name="username" autocomplete="username" />
+            </div>
+            <div class="form-row">
+                <label for="reg-password">Contraseña</label>
+                <input id="reg-password" class="input" type="password" name="password" autocomplete="new-password" />
+            </div>
+            <div class="form-row">
+                <label for="reg-nombre">Nombre</label>
+                <input id="reg-nombre" class="input" type="text" name="nombre" />
+            </div>
+            <div class="form-row">
+                <label for="reg-apellido">Apellido</label>
+                <input id="reg-apellido" class="input" type="text" name="apellido" />
+            </div>
+            <div class="form-row">
+                <label for="reg-foto">Foto</label>
+                <input id="reg-foto" class="file" type="file" name="foto" />
+            </div>
+            <div class="actions">
+                <button class="btn primary" type="submit">Registrarse</button>
+            </div>
+        </form>
+    </section>
+</div>

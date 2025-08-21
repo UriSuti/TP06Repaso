@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "VerTareas";
+}
+
+<div class="container">
+    <header class="header">
+        <div class="brand">Tu App</div>
+        <nav class="nav">
+            <a href='@Url.Action("Index","Home")'>Inicio</a>
+            <a href='@Url.Action("irAgregarTarea","Home")'>Agregar Tarea</a>
+            <a href='@Url.Action("CerrarSesion","Account")'>Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <section class="panel">
+        <h2 class="section-title">Mis Tareas</h2>
+
+        <div class="user">
+            <img src='@ViewBag.Usuario.Foto' alt="Foto de @ViewBag.Usuario.Nombre @ViewBag.Usuario?.Apellido" />
+            <div>
+                <div><strong>@ViewBag.Usuario.Nombre</strong> @ViewBag.Usuario.Apellido</div>
+                <div class="actions" style="margin-top:8px;">
+                    <a class="btn" href='@Url.Action("irAgregarTarea", "Home")'>Agregar Tarea</a>
+                    <a class="btn ghost" href='@Url.Action("CerrarSesion", "Account")'>Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="sep" />
+
+        <div class="grid">
+            @foreach(Tarea tarea in ViewBag.Tareas)
+            {
+                <article class="card">
+                    <h3>@tarea.Titulo</h3>
+                    <div class="actions">
+                        <a class="btn primary" href='@Url.Action("VerTarea", "Home", new { id = tarea.getId() })'>Ver Tarea</a>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
+</div>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TP06Repaso")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8768a49e85dba9f9dc06107c45ce41a2639d66f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c221b14d63fa78d9f469c6d8bea29bac0a110cc")]
 [assembly: System.Reflection.AssemblyProductAttribute("TP06Repaso")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TP06Repaso")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
